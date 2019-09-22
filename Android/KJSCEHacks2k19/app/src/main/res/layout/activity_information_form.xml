@@ -4,13 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Opening app after registration"
-        android:textSize="30dp"
-        tools:ignore="MissingConstraints" />
-
+    tools:context=".InformationForm">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="One time Form visible only after registration"
+    android:textSize="30dp"
+    tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>
