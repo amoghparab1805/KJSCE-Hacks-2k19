@@ -1,7 +1,6 @@
 {
-  "name": "React-FirebaseUi-Authentication",
+  "name": "kjsce2k19",
   "version": "1.0.0",
-  "description": "[![Youtube Video](http://img.youtube.com/vi/zq0TuNqV0Ew/0.jpg)](http://www.youtube.com/watch?v=zq0TuNqV0Ew)",
   "main": "index.js",
   "dependencies": {
     "firebase": "^7.0.0",
@@ -14,20 +13,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lingonsaft/React-FirebaseUi-Authentication.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/lingonsaft/React-FirebaseUi-Authentication/issues"
-  },
-  "homepage": "https://github.com/lingonsaft/React-FirebaseUi-Authentication#readme",
   "browserslist": {
     "production": [
       ">0.2%",
