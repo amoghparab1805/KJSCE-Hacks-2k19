@@ -1,0 +1,43 @@
+{
+  "name": "React-FirebaseUi-Authentication",
+  "version": "1.0.0",
+  "description": "[![Youtube Video](http://img.youtube.com/vi/zq0TuNqV0Ew/0.jpg)](http://www.youtube.com/watch?v=zq0TuNqV0Ew)",
+  "main": "index.js",
+  "dependencies": {
+    "firebase": "^7.0.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-firebaseui": "^4.0.0",
+    "react-scripts": "^3.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lingonsaft/React-FirebaseUi-Authentication.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lingonsaft/React-FirebaseUi-Authentication/issues"
+  },
+  "homepage": "https://github.com/lingonsaft/React-FirebaseUi-Authentication#readme",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
