@@ -49,7 +49,7 @@ class App extends Component {
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user })
-      console.log("user", user)
+      console.log("user", user['providerData'][0])
     })
   }
 
