@@ -1,73 +1,63 @@
 from django.shortcuts import render
-import pyrebase
-
 from rest_framework.views import APIView
+from rest_framework import generics, viewsets, permissions, status
 from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.hashers import make_password
+from rest_framework.response import Response
 
 from .models import *
+from .serializers import *
 
-config = {
-    'apiKey': "AIzaSyDUP81oZRkZJS_TRYDnXelp9_TWNCj2OWA",
-    'authDomain': "kjscehack-fa5ae.firebaseapp.com",
-    'databaseURL': "https://kjscehack-fa5ae.firebaseio.com",
-    'projectId': "kjscehack-fa5ae",
-    'storageBucket': "",
-    'messagingSenderId': "803546715173",
-    'appId': "1:803546715173:web:ec618fcdabd348a278dbcc",
-    'measurementId': "G-H4SLLNZ59N"
-}
+class EmailSignUp(generics.CreateAPIView):
+    serializer_class = EmailSignUpSerializer
+    queryset = EmailUser.objects.all()
 
-firebase = pyrebase.initialize_app(config)
-auth = firebase.auth()
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        hashed_password = make_password(serializer.validated_data['password'])
+        serializer.validated_data['password'] = hashed_password
+        self.perform_create(serializer)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-# data
-# {
-# "displayName": "Harsh Mistry",
-# "email": "mistryharsh28@gmail.com",
-# "phoneNumber": null,
-# "photoURL": "https://lh3.googleusercontent.com/a-/AAuE7mDqfpYfLfWXLOZcwO4vuNTJQ6ydxp00iRLvHYZTPQ",
-# "providerId": "google.com"
-# }
-
-class UpdateUserData(APIView):
-    
+class GoogleSignUp(APIView):
     def post(self, request, *args, **kwargs):
-        # import pdb; pdb.set_trace()
         data = request.data
-        print(request)
-        print(data)
         display_name = data['displayName']
         email = data['email']
-        phone_number = data['phoneNumber']
         photo_url = data['photoURL']
-        provided_id = data['providerId']
-
-        if(provided_id == 'google.com'):
-            try:
-                social_user = SocialUser.objects.get(email=email, provided_id=provided_id)
-            except SocialUser.DoesNotExist:
-                social_user = SocialUser(
-                    display_name=display_name, 
-                    email=email,
-                    phone_number=phone_number,
-                    photo_url=photo_url,
-                    provided_id=provided_id
-                )
-                social_user.save()
-        elif(provided_id == 'phone'):
-            try:
-                social_user = SocialUser.objects.get(phone_number=phone_number, provided_id=provided_id)
-            except SocialUser.DoesNotExist:
-                social_user = SocialUser(
-                    display_name=display_name, 
-                    email=email,
-                    phone_number=phone_number,
-                    photo_url=photo_url,
-                    provided_id=provided_id
-                )
-                social_user.save()
-
+        provider_id = data['providerId']
+        try:
+            google_user = GoogleUser.objects.get(email=email, provider_id=provider_id)
+        except GoogleUser.DoesNotExist:
+            google_user = GoogleUser(
+                display_name=display_name, 
+                email=email,
+                photo_url=photo_url,
+                provider_id=provider_id
+            )
+            google_user.save()
         return JsonResponse({
             'Success': 'Success',
-            'social_user': social_user.display_name # TODO : Make serializer for user
+            'google_user': google_user.display_name # TODO : Make serializer for user
+        })
+
+class PhoneSignUp(APIView):
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        display_name = data['displayName']
+        phone_number = data['phone_number']
+        provider_id = data['providerId']
+        try:
+            phone_user = PhoneUser.objects.get(phone_number=phone_number, provider_id=provider_id)
+        except PhoneUser.DoesNotExist:
+            phone_user = PhoneUser(
+                display_name=display_name, 
+                phone_number=phone_number,
+                provider_id=provider_id
+            )
+            phone_user.save()
+        return JsonResponse({
+            'Success': 'Success',
+            'phone_user': phone_user.display_name # TODO : Make serializer for user
         })
