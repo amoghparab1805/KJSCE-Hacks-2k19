@@ -28,8 +28,8 @@ class App extends Component {
     ],
     callbacks: {
       signInSuccessWithAuthResult: async () => {
-        await axios.post("http://localhost:8000/api/update-user-data/", this.state.user, { headers: {"Content-Type": "application/json"} }).then(response => {
-        console.log(response.data);
+        await axios.post("http://localhost:8000/api/update-user-data/", JSON.stringify(firebase.auth().currentUser['providerData'][0]), { headers: {"Content-Type": "application/json"} }).then(response => {
+        console.log(response.data)
       })}
     }
   }
