@@ -32,10 +32,8 @@ auth = firebase.auth()
 class UpdateUserData(APIView):
     
     def post(self, request, *args, **kwargs):
+        import pdb; pdb.set_trace()
         data = request.data
-
-        print(data)
-
         display_name = data['displayName']
         email = data['email']
         phone_number = data['phoneNumber']
@@ -68,5 +66,5 @@ class UpdateUserData(APIView):
                 social_user.save()
 
         return JsonResponse({
-            'Success': 'Success'
+            'Success': 'Success', 'social_user': social_user
         })
