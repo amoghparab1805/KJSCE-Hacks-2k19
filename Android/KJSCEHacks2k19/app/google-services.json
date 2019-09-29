@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "94913900845",
+    "firebase_url": "https://kjsce-hacks-2k19.firebaseio.com",
+    "project_id": "kjsce-hacks-2k19",
+    "storage_bucket": "kjsce-hacks-2k19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94913900845:android:9d4b5710226bd8ea3de3a4",
+        "android_client_info": {
+          "package_name": "com.redhatpirates.kjsce_hacks_2k19"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "94913900845-usgu0fag7g14nbllnp6f265iq5rb39vs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.redhatpirates.kjsce_hacks_2k19",
+            "certificate_hash": "302a8438e75c7c8c58fe0dfcc83fe60809eee336"
+          }
+        },
+        {
+          "client_id": "94913900845-npagmdo5t6uo9olibf6taroe90pl48sl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoKwCR9MUxpbbiJB_fFSaI5GuBFHFdyG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "94913900845-npagmdo5t6uo9olibf6taroe90pl48sl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
