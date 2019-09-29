@@ -13,27 +13,24 @@ class SignUp extends Component {
     signInFlow: "popup",
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-      firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+      {
+        provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+        recaptchaParameters: {
+          type: 'image',
+          size: 'normal',
+          badge: 'bottomleft'
+        },
+        defaultCountry: 'IN'
+      }
     ],
     callbacks: {
-      signInSuccessWithAuthResult: async () => {
-        if (firebase.auth().currentUser['providerData'][0].providerId === 'google.com') {
-          await axios.post("http://localhost:8000/api/google-sign-up/", 
-            JSON.stringify(firebase.auth().currentUser['providerData'][0]), 
-            { headers: {"Content-Type": "application/json"} }
-          ).then(response => {
-            console.log(response.data)
-          }) 
-        }
-        // if (firebase.auth().currentUser['providerData'][0].providerId === 'phone') {
-        //   await axios.post("http://localhost:8000/api/phone-sign-up/", 
-        //     JSON.stringify(this.state.phoneUserDetails), 
-        //     { headers: {"Content-Type": "application/json"} }
-        //   ).then(response => {
-        //     console.log(response.data)
-        //   }) 
-        // }
+      signInSuccessWithAuthResult: async (authResult) => {
+        await axios.post("http://localhost:8000/api/sign-up/", 
+          JSON.stringify(authResult.user['providerData'][0]), 
+          { headers: {"Content-Type": "application/json"} }
+        ).then(response => {
+          console.log(response.data)
+        })
       }
     }
   }
@@ -73,13 +70,6 @@ class SignUp extends Component {
               uiConfig={this.uiConfig}
               firebaseAuth={firebase.auth()}
             />
-            <hr width="300px" style={{borderTop:"3px dashed"}}/>
-            <div style={{textAlign: "center"}}>
-              <input type="text" name="displayName" placeholder="Full Name"/><br/>
-              <input type="email" name="email" placeholder="Email"/><br/>
-              <input type="password" name="password" placeholder="Password"/><br/>
-              <input type="submit" name="submit" onClick={this.onClickSignUp}/>
-            </div>
           </div>
         )}
       </div>
