@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             if(mAuth.getCurrentUser() == null && spref.getString("userName","12121212121212nmnmn1").equals("12121212121212nmnmn1")){
-                startActivity(new Intent(MainActivity.this,SignInOptions.class));
+                startActivity(new Intent(MainActivity.this,LogInSignUp.class));
                 finish();
             }
         }

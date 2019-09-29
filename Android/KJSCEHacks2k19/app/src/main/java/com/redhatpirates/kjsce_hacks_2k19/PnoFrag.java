@@ -38,14 +38,15 @@ public class PnoFrag extends Fragment {
     ProgressBar pBar;
     SharedPreferences spref;
     SharedPreferences.Editor edit;
+    String pNo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view= inflater.inflate(R.layout.fragment_pno, container, false);
-        spref = view.getContext().getSharedPreferences("user",Context.MODE_PRIVATE);
-        edit=spref.edit();
+//        spref = view.getContext().getSharedPreferences("user",Context.MODE_PRIVATE);
+//        edit=spref.edit();
         edTxt=view.findViewById(R.id.edTxt);
         otpButton=view.findViewById(R.id.otpButton);
         pNoSpinner=view.findViewById(R.id.pNoSpinner);
@@ -56,7 +57,7 @@ public class PnoFrag extends Fragment {
             @Override
             public void onClick(View v) {
                 String countryCode=countryCodes.countryAreaCodes[pNoSpinner.getSelectedItemPosition()];
-                String pNo=edTxt.getText().toString().trim();
+                pNo=edTxt.getText().toString().trim();
                 if(pNo.isEmpty()||pNo.length()<10)
                 {
                     edTxt.setError("Please enter a valid phone number");
@@ -130,8 +131,10 @@ public class PnoFrag extends Fragment {
                 if(task.isSuccessful())
                 {   pBar.setVisibility(View.GONE);
                     Intent gSignIn = new Intent(getContext(), InformationForm.class);
-                    edit.putString("userName",phoneNumber);
-                    edit.commit();
+                    //edit.putString("userName",phoneNumber);
+                    gSignIn.putExtra("type","phone");
+                    gSignIn.putExtra("phone",pNo);
+                    //edit.commit();
                     gSignIn.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(gSignIn);
 

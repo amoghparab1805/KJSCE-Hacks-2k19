@@ -41,6 +41,7 @@
         android:layout_marginRight="30dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:textSize="30dp"
         android:text="Send OTP"
         android:textColor="@color/white"
         android:background="@drawable/buttons_style_two"

@@ -129,10 +129,11 @@ public class SignInOptions extends AppCompatActivity implements View.OnClickList
     private void updateUI(FirebaseUser user) {
 
 //change temp to family and stud
-        editor.putString("userName", user.getDisplayName());
-        editor.commit();
+//        editor.putString("userName", user.getDisplayName());
+//        editor.commit();
         Toast.makeText(SignInOptions.this, "Welcome", Toast.LENGTH_LONG).show();
         Intent gSignIn = new Intent(this, InformationForm.class);
+        gSignIn.putExtra("type","email");
         startActivity(gSignIn);
         finish();
     }
