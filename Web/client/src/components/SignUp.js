@@ -36,15 +36,6 @@ class SignUp extends Component {
     }
   }
 
-  // onClickSignUp = async() => {
-  //   await axios.post("http://localhost:8000/api/email-sign-up/", 
-  //     JSON.stringify(this.state.emailUser), 
-  //     { headers: {"Content-Type": "application/json"} }
-  //   ).then(response => {
-  //     console.log(response.data)
-  //   })
-  // }
-
   signOut = async() => {
     // await axios.post("http://localhost:8000/api/auth/token/logout/",
     // { headers: {"Authorization": `Token ${localStorage.getItem("token")}`} }).then(response => {
