@@ -30,6 +30,7 @@ class SignUp extends Component {
           { headers: {"Content-Type": "application/json"} }
         ).then(response => {
           console.log(response.data)
+          localStorage.setItem("token", response.data.token)
         })
       }
     }
@@ -44,6 +45,15 @@ class SignUp extends Component {
   //   })
   // }
 
+  signOut = async() => {
+    // await axios.post("http://localhost:8000/api/auth/token/logout/",
+    // { headers: {"Authorization": `Token ${localStorage.getItem("token")}`} }).then(response => {
+    //   console.log("Successfully Logged Out")
+    //   localStorage.removeItem("token")
+    // })
+    firebase.auth().signOut()
+  }
+
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user })
@@ -57,7 +67,7 @@ class SignUp extends Component {
         {this.state.isSignedIn ? (
           <span>
             <div>Signed In!</div>
-            <button onClick={() => firebase.auth().signOut()}>Sign out!</button>
+            <button onClick={this.signOut}>Sign out!</button>
             <h1>Welcome {firebase.auth().currentUser.displayName} {firebase.auth().currentUser.phoneNumber}</h1>
             <img
               alt="profile"
