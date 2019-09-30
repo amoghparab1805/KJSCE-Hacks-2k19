@@ -23,7 +23,7 @@ class SignUp extends Component {
     ],
     callbacks: {
       signInSuccessWithAuthResult: async (authResult) => {
-        await axios.post("http://localhost:8000/api/sign-up/", 
+        await axios.post("https://red-hat-pirates.herokuapp.com/api/sign-up/", 
           JSON.stringify(authResult.user['providerData'][0]), 
           { headers: {"Content-Type": "application/json"} }
         ).then(response => {
@@ -41,7 +41,7 @@ class SignUp extends Component {
   };
 
   signOut = async() => {
-    await axios.post("http://localhost:8000/api/auth/token/logout/", {},
+    await axios.post("https://red-hat-pirates.herokuapp.com/api/auth/token/logout/", {},
     { headers: {"Authorization" : `Token ${localStorage.getItem("token")}`} }).then(response => {
       console.log("Successfully Logged Out")
       localStorage.removeItem("token")
@@ -56,7 +56,7 @@ class SignUp extends Component {
       console.log("user", user)
       if(!!user){
         if(user['providerData'][0]['providerId'] === 'phone'){
-          await axios.post("http://localhost:8000/api/sign-up/",{ 
+          await axios.post("https://red-hat-pirates.herokuapp.com/api/sign-up/",{ 
             displayName: user['providerData'][0]['displayName'],
             email: null,
             phoneNumber: user['providerData'][0]['phoneNumber'],
