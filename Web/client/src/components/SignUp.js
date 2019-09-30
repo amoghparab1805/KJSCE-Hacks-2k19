@@ -32,7 +32,18 @@ class SignUp extends Component {
           console.log(response.data)
           localStorage.setItem("token", response.data.token)
         })
-      }
+      },
+      // onVerificationCompleted: async (phoneCredentials) => {
+      //   console.log("Hahaha")
+      //   console.log(phoneCredentials)
+      //   axios.post("http://localhost:8000/api/sign-up/", 
+      //     JSON.stringify(authResult.user['providerData'][0]), 
+      //     { headers: {"Content-Type": "application/json"} }
+      //   ).then(response => {
+      //     console.log(response.data)
+      //     localStorage.setItem("token", response.data.token)
+      //   })
+      // }
     }
   }
 
@@ -42,6 +53,7 @@ class SignUp extends Component {
     //   console.log("Successfully Logged Out")
     //   localStorage.removeItem("token")
     // })
+    localStorage.removeItem('token')
     firebase.auth().signOut()
   }
 
@@ -49,6 +61,28 @@ class SignUp extends Component {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user })
       console.log("user", user)
+      if(!!user){
+        if(user['providerData'][0]['providerId'] === 'phone'){
+          // open modal here
+          
+          // var data = JSON.stringify(user['providerData'][0])
+          // data['displayName'] = displayName
+          // request
+          axios.post("http://localhost:8000/api/sign-up/",{ 
+            displayName: "Harsh Mistry",
+            email: null,
+            phoneNumber: user['providerData'][0]['phoneNumber'],
+            photoURL: null,
+            providerId: "phone",
+            uid: user['providerData'][0]['uid']
+          }, 
+            { headers: {"Content-Type": "application/json"} }
+          ).then(response => {
+            console.log(response.data)
+            localStorage.setItem("token", response.data.token)
+          })
+        }
+      }
     })
   }
 
