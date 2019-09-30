@@ -48,11 +48,11 @@ class SignUp extends Component {
   }
 
   signOut = async() => {
-    // await axios.post("http://localhost:8000/api/auth/token/logout/",
-    // { headers: {"Authorization": `Token ${localStorage.getItem("token")}`} }).then(response => {
-    //   console.log("Successfully Logged Out")
-    //   localStorage.removeItem("token")
-    // })
+    await axios.post("http://localhost:8000/api/auth/token/logout/", {},
+    { headers: {"Authorization" : `Token ${localStorage.getItem("token")}`} }).then(response => {
+      console.log("Successfully Logged Out")
+      localStorage.removeItem("token")
+    })
     localStorage.removeItem('token')
     firebase.auth().signOut()
   }
