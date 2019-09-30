@@ -13,13 +13,7 @@ class SignUp(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
         username = data['uid']
-        if('displayName' in data.keys()):
-            display_name = data['displayName']
-            first_name = display_name.split(' ')[0]
-            last_name = display_name.split(' ')[1]
-        elif('firstName' in data.keys() and 'lastName' in data.keys()):
-            first_name = data['firstName']
-            last_name = data['lastName']
+        display_name = data['displayName']
         email = data['email']
         phone_number = data['phoneNumber']
         photo_url = data['photoURL']
@@ -31,8 +25,7 @@ class SignUp(APIView):
         except User.DoesNotExist:
             user = User(
                 username=username,
-                first_name=first_name, 
-                last_name=last_name,
+                display_name=display_name,
                 email=email,
                 phone_number=phone_number,
                 password=hashed_password,

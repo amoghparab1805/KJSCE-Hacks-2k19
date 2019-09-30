@@ -6,8 +6,6 @@ import firebase from "../Firebase"
 class SignUp extends Component {
   state = { 
     isSignedIn: false,
-    phoneUserDetails: {},
-    emailUser: {},
   }
   uiConfig = {
     signInFlow: "popup",
@@ -33,19 +31,14 @@ class SignUp extends Component {
           localStorage.setItem("token", response.data.token)
         })
       },
-      // onVerificationCompleted: async (phoneCredentials) => {
-      //   console.log("Hahaha")
-      //   console.log(phoneCredentials)
-      //   axios.post("http://localhost:8000/api/sign-up/", 
-      //     JSON.stringify(authResult.user['providerData'][0]), 
-      //     { headers: {"Content-Type": "application/json"} }
-      //   ).then(response => {
-      //     console.log(response.data)
-      //     localStorage.setItem("token", response.data.token)
-      //   })
-      // }
     }
   }
+
+  closeModal = (e) => {
+    this.setState({
+      showModal: false
+    });
+  };
 
   signOut = async() => {
     await axios.post("http://localhost:8000/api/auth/token/logout/", {},
@@ -58,18 +51,13 @@ class SignUp extends Component {
   }
 
   componentDidMount = () => {
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged(async (user) => {
       this.setState({ isSignedIn: !!user })
       console.log("user", user)
       if(!!user){
         if(user['providerData'][0]['providerId'] === 'phone'){
-          // open modal here
-          
-          // var data = JSON.stringify(user['providerData'][0])
-          // data['displayName'] = displayName
-          // request
-          axios.post("http://localhost:8000/api/sign-up/",{ 
-            displayName: "Harsh Mistry",
+          await axios.post("http://localhost:8000/api/sign-up/",{ 
+            displayName: user['providerData'][0]['displayName'],
             email: null,
             phoneNumber: user['providerData'][0]['phoneNumber'],
             photoURL: null,
@@ -80,6 +68,7 @@ class SignUp extends Component {
           ).then(response => {
             console.log(response.data)
             localStorage.setItem("token", response.data.token)
+            localStorage.removeItem("displayName")
           })
         }
       }

@@ -7,6 +7,7 @@ class User(AbstractUser):
     provider_id = models.CharField(max_length=50)
     photo_url =  models.CharField(max_length=1024, null=True)
     email = models.EmailField(null=True)
+    display_name = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        return self.username
