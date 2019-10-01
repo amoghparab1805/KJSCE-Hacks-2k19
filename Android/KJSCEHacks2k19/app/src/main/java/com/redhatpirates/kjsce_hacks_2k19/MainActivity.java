@@ -30,9 +30,13 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-            if(mAuth.getCurrentUser() == null && spref.getString("userName","12121212121212nmnmn1").equals("12121212121212nmnmn1")){
-                startActivity(new Intent(MainActivity.this,LogInSignUp.class));
+            if(spref.getString("token","zxbczxvn23512743kglfgndfj").equals("zxbczxvn23512743kglfgndfj")||mAuth.getCurrentUser() == null || spref.getString("userName","12121212121212nmnmn1").equals("12121212121212nmnmn1")){
+                startActivity(new Intent(MainActivity.this,SignInOptions.class));
                 finish();
+            }
+            else
+            {
+                Toast.makeText(MainActivity.this,""+spref.getString("token","not working"),Toast.LENGTH_LONG).show();
             }
         }
     }
