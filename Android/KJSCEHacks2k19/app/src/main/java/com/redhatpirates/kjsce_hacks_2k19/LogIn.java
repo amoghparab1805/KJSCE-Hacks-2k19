@@ -25,7 +25,7 @@ public class LogIn extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(LogIn.this,MainActivity.class));
                 finish();
-                //Todo Login post requests ,add details to shared pref and intent to home page
+
             }
         });
 

@@ -131,13 +131,10 @@ public class PnoFrag extends Fragment {
                 if(task.isSuccessful())
                 {   pBar.setVisibility(View.GONE);
                     Intent gSignIn = new Intent(getContext(), InformationForm.class);
-                    //edit.putString("userName",phoneNumber);
                     gSignIn.putExtra("type","phone");
                     gSignIn.putExtra("phone",pNo);
-                    //edit.commit();
                     gSignIn.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(gSignIn);
-
                 }
                 else
                 {   pBar.setVisibility(View.GONE);

@@ -51,7 +51,6 @@ public class InformationForm extends AppCompatActivity {
         userfName = findViewById(R.id.userfname);
         userlName = findViewById(R.id.userlname);
         age=findViewById(R.id.age);
-
         email = findViewById(R.id.email);
         mSpin = findViewById(R.id.gender_spinner);
         phone = findViewById(R.id.phone);

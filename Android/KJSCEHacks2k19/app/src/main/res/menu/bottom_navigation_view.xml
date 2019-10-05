@@ -6,6 +6,10 @@
         android:icon="@drawable/dashboard"
         />
     <item
+        android:title="Investment"
+        android:id="@+id/prediction"
+        android:icon="@drawable/prediction"/>
+    <item
         android:title="Nearby ATM"
         android:id="@+id/atm"
         android:icon="@drawable/atm"
@@ -20,10 +24,7 @@
         android:title="Contact Us"
         android:id="@+id/chat"
         android:icon="@drawable/chat"/>
-    <!--<item-->
-        <!--android:title="Pass"-->
-        <!--android:id="@+id/pass"-->
-        <!--android:icon="@drawable/pass"/>-->
+
     <!--<item-->
         <!--android:title="Log Out"-->
         <!--android:id="@+id/log_out"-->

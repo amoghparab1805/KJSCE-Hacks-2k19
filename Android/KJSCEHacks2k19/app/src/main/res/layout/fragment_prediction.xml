@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PredictionFragment">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+ <Button
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:id="@+id/realEstate"
+     android:text="Real Estate"
+     android:background="@drawable/buttons_style"
+     android:layout_margin="7dp"
+     android:textColor="@color/white"
+     android:textStyle="bold"/>
+
+ <Button
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:id="@+id/jewellery"
+     android:text="Jewellery"
+     android:background="@drawable/buttons_style_two"
+     android:layout_margin="7dp"
+     android:textStyle="bold"
+ android:textColor="@color/white"/>
+ <Button
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:id="@+id/stocks"
+     android:text="Stocks"
+     android:textStyle="bold"
+     android:background="@drawable/buttons_style"
+     android:layout_margin="7dp"
+     android:textColor="@color/white"/>
+ <Button
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:id="@+id/MutualFunds"
+     android:text="Mutual Funds"
+     android:textStyle="bold"
+     android:background="@drawable/buttons_style_two"
+     android:layout_margin="7dp"
+     android:textColor="@color/white"/>
+
+</LinearLayout>
+</FrameLayout>

@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitInstance {
 
     private static Retrofit instance = null;
-    //Todo-URL
+
     public static String BASE_URL = "https://red-hat-pirates.herokuapp.com/api/";
 
     public static Retrofit getInstance(){
