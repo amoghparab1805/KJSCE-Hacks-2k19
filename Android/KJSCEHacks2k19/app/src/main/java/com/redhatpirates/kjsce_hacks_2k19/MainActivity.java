@@ -10,17 +10,23 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity {
     static SharedPreferences spref;
     boolean connection;
     public FirebaseAuth mAuth;
+    String json;
+    Gson gson;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mAuth= FirebaseAuth.getInstance();
         spref = getApplicationContext().getSharedPreferences("user", MODE_PRIVATE);
+        mAuth= FirebaseAuth.getInstance();
+        gson = new Gson();
+        json = spref.getString("user", "");
+        UserDetails ud = gson.fromJson(json, UserDetails.class);
         connection = haveNetworkConnection();
         if (!connection) {
             Toast.makeText(MainActivity.this, "Please check your internet connection and try again", Toast.LENGTH_LONG).show();
@@ -30,13 +36,15 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-            if(spref.getString("token","zxbczxvn23512743kglfgndfj").equals("zxbczxvn23512743kglfgndfj")||mAuth.getCurrentUser() == null || spref.getString("userName","12121212121212nmnmn1").equals("12121212121212nmnmn1")){
+            if(spref.getString("token","zxbczxvn23512743kglfgndfj").equals("zxbczxvn23512743kglfgndfj")||mAuth.getCurrentUser() == null ){
                 startActivity(new Intent(MainActivity.this,SignInOptions.class));
                 finish();
             }
             else
             {
-                Toast.makeText(MainActivity.this,""+spref.getString("token","not working"),Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this,""+ud.getGender(),Toast.LENGTH_LONG).show();
+                startActivity(new Intent(MainActivity.this,BottomNavigationMain.class));
+                finish();
             }
         }
     }
