@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 // import Navbar from './components/Navbar'
-// import Landing from './components/Landing'
+// import Dashboard from './components/Dashboard'
 // import Login from './components/Login'
 import SignUp from './components/SignUp'
 
@@ -12,9 +12,9 @@ class App extends Component {
       <Router>
       <div className="App">
         {/* <Navbar /> */}
-        {/* <Route exact path="/" component={Landing} /> */}
+        {/* <Route exact path="/dashboard" component={Dashboard} /> */}
         <div className="container">
-          <Route exact path="/sign-up" component={SignUp} />
+          <Route exact path="/" component={SignUp} />
           {/* <Route exact path="/login" component={Login} /> */}
         </div>
       </div>
