@@ -7,23 +7,43 @@ import {
     Button,
   } from 'antd';
 import React from "react"
+import axios from "axios"
 
-  
 const { Option } = Select;
-  
+
 class DetailsForm extends React.Component {
 
+constructor() {
+    super()
+    this.state = {
+        gender: 'M',
+    }
+    this.onChange = this.onChange.bind(this)
+}
+
 handleSubmit = e => {
+    e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
     if (!err) {
-        console.log('Received values of form: ', values);
+        axios.post("https://red-hat-pirates.herokuapp.com/api/update-user/", 
+          JSON.stringify({
+            displayName: values['display_name'],
+            uid: localStorage.getItem("uid"),
+            age: values['age'],
+            gender: this.state.gender
+          }), 
+          { headers: {"Content-Type": "application/json"} }
+        ).then(response => {
+          console.log(response.data)
+          localStorage.setItem("isNewUser", false)
+          window.location.reload()
+        })
     }
     });
 };
 
-onChange(value) {
-    // this.setState({gender:value});
-    console.log(value);
+onChange(e) {
+    this.setState({gender:e.target.value});
 }
 
 render() {
@@ -95,20 +115,17 @@ render() {
             </span>
         }
         >
-        <Select
-            showSearch
+        <select
             style={{ width: 200 }}
             placeholder="Select a gender"
-            optionFilterProp="children"
+            name="gender"
+            value={this.state.gender}
             onChange={this.onChange}
-            filterOption={(input, option) =>
-                option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
         >
-            <Option value="M">Male</Option>
-            <Option value="F">Female</Option>
-            <Option value="O">Other</Option>
-        </Select>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="O">Other</option>
+        </select>
         </Form.Item>
         
         

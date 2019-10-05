@@ -14,6 +14,7 @@ class SignUp extends Component {
   state = { 
     isSignedIn: false,
     collapsed: false,
+    isNewUser:false,
   }
   uiConfig = {
     signInFlow: "popup",
@@ -46,8 +47,9 @@ class SignUp extends Component {
         ).then(response => {
           console.log(response.data)
           localStorage.setItem("token", response.data.token)
-          localStorage.setItem("isNewUser", response.data.is_new_user)
-          localStorage.setItem("uid", response.data.user.user)
+          // localStorage.setItem("isNewUser", response.data.is_new_user)
+          this.setState({isNewUser:response.data.is_new_user})
+          localStorage.setItem("uid", response.data.user.username)
         })
       },
     }
@@ -106,7 +108,7 @@ class SignUp extends Component {
     <div className="App">
         {this.state.isSignedIn ? (
           [
-            (localStorage.getItem('isNewUser') ?
+            (this.state.isNewUser ?
               (
                 <WrappedDetailsForm/>
               ): (
