@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,77 +20,91 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class InformationForm extends AppCompatActivity {
-    String type,pno;
-    AutoCompleteTextView userName,email,phone,age,pwd,cpwd;
+    String type, pno;
+    AutoCompleteTextView userfName, userlName, email, phone;
     Button save;
-    FirebaseUser user ;
-    TextInputLayout layoutEmail,layoutPhone;
+    FirebaseUser user;
+    TextInputLayout layoutEmail, layoutPhone;
     SharedPreferences spref;
     SharedPreferences.Editor editor;
-    FirebaseFirestore fdb;
+    ProgressBar pbar;
+    UserDetails ud;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information_form);
-        type=getIntent().getStringExtra("type");
-        pno=getIntent().getStringExtra("phone");
-        fdb=FirebaseFirestore.getInstance();
+        pbar = findViewById(R.id.pbar);
+        type = getIntent().getStringExtra("type");
+        pno = getIntent().getStringExtra("phone");
         layoutEmail = (TextInputLayout) findViewById(R.id.layoutEmail);
         layoutPhone = (TextInputLayout) findViewById(R.id.layoutPhone);
-        userName=findViewById(R.id.username);
-        email=findViewById(R.id.email);
-        phone=findViewById(R.id.phone);
-        age=findViewById(R.id.register_age);
-        pwd=findViewById(R.id.pwd);
-        cpwd=findViewById(R.id.cpwd);
-        save=findViewById(R.id.save);
+        userfName = findViewById(R.id.userfname);
+        userlName = findViewById(R.id.userlname);
+        email = findViewById(R.id.email);
+        phone = findViewById(R.id.phone);
+        save = findViewById(R.id.save);
         user = FirebaseAuth.getInstance().getCurrentUser();
-        spref = getApplicationContext().getSharedPreferences("userName", MODE_PRIVATE);
+        spref = getApplicationContext().getSharedPreferences("user", MODE_PRIVATE);
         editor = spref.edit();
-        if(type.equals("phone")){
-            layoutEmail.setHint("Enter Email(optional)");
+        if (type.equals("phone")) {
+            email.setVisibility(View.GONE);
             phone.setText(pno);
             phone.setEnabled(false);
-        }
-        else
-        {   userName.setText(user.getDisplayName());
+        } else {
+            userfName.setText(user.getDisplayName().split(" ")[0]);
+            userlName.setText(user.getDisplayName().split(" ")[1]);
             email.setText(user.getEmail());
             email.setEnabled(false);
-            layoutPhone.setHint("Enter Phone No.(optional)");
+            phone.setVisibility(View.GONE);
         }
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(userName.getText().toString().equals("") || age.getText().toString().equals("")||pwd.getText().toString().equals("")){
-                    Toast.makeText(InformationForm.this,"Fields cannot be empty",Toast.LENGTH_LONG).show();
-                }
-                else if(!cpwd.getText().toString().equals(pwd.getText().toString())){
-                    Toast.makeText(InformationForm.this,"Passwords do not match",Toast.LENGTH_LONG).show();
-                    pwd.setText("");
-                    cpwd.setText("");
-                }
-                else
-                {
+                if (userfName.getText().toString().equals("") || userlName.getText().toString().equals("")) {
+                    Toast.makeText(InformationForm.this, "Fields cannot be empty", Toast.LENGTH_LONG).show();
+                } else {
+                    if (type.equals("phone")) {
+                        ud = new UserDetails(""+userfName.getText().toString()+userlName.getText().toString(),"",phone.getText().toString(),user.getUid(),user.getProviderId(),"");
+                    } else {
+                        ud = new UserDetails(""+userfName.getText().toString()+userlName.getText().toString(),user.getEmail(),"",user.getUid(),user.getProviderId(),user.getPhotoUrl().toString());
+
+                    }
+                    save.setVisibility(View.GONE);
+                    pbar.setVisibility(View.VISIBLE);
                     //Todo user info post request
-save.setVisibility(View.GONE);
-                        fdb.collection("Users").document(userName.getText().toString()).set(new UserDetails(userName.getText().toString(),age.getText().toString(),email.getText().toString(),pwd.getText().toString(),phone.getText().toString())).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                editor.putString("userName",userName.getText().toString());
+                    RetrofitInterface ri = RetrofitInstance.getInstance().create(RetrofitInterface.class);
+                    Call<UserDetails> userDetailsCall = ri.signIn(ud);
+                    userDetailsCall.enqueue(new Callback<UserDetails>() {
+                        @Override
+                        public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
+                            if(response.body()!=null) {
+                                Toast.makeText(InformationForm.this, "Welcome", Toast.LENGTH_LONG).show();
+                                editor.putString("token", response.body().getToken());
+                                editor.putString("userName", userfName.getText().toString() + " "+userlName.getText().toString());
                                 editor.commit();
-                                startActivity(new Intent(InformationForm.this,MainActivity.class));
+                                startActivity(new Intent(InformationForm.this, MainActivity.class));
                                 finish();
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                save.setVisibility(View.VISIBLE);
+                            {
                                 Toast.makeText(InformationForm.this,"Something went wrong",Toast.LENGTH_LONG).show();
+                                save.setVisibility(View.VISIBLE);
+                                pbar.setVisibility(View.GONE);
                             }
-                        });
-
+                        }
+                        @Override
+                        public void onFailure(Call<UserDetails> call, Throwable t) {
+                            Toast.makeText(InformationForm.this,""+t.getMessage(),Toast.LENGTH_LONG).show();
+                            save.setVisibility(View.VISIBLE);
+                            pbar.setVisibility(View.GONE);
+                        }
+                    });
                 }
             }
         });

@@ -1,33 +1,46 @@
 package com.redhatpirates.kjsce_hacks_2k19;
 
 public class UserDetails {
-    String name,age,email,password,phone;
+    private String displayName,email, phoneNumber, uid, providerId,photoURL,token;
 
-    public UserDetails(String name, String age, String email, String password, String phone) {
-        this.name = name;
-        this.age = age;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public String getName() {
-        return name;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public String getAge() {
-        return age;
+    public String getUid() {
+        return uid;
+    }
+
+    public String getProviderId() {
+        return providerId;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getToken() {
+        return token;
     }
 
-    public String getPhone() {
-        return phone;
+    public UserDetails(String token) {
+        this.token = token;
+    }
+
+    public UserDetails(String displayName, String email, String phoneNumber, String uid, String providerId, String photoURL) {
+        this.displayName =displayName;
+        this.phoneNumber = phoneNumber;
+        this.uid = uid;
+        this.providerId = providerId;
+        this.photoURL = photoURL;
+        this.email=email;
     }
 }

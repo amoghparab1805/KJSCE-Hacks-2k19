@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LogIn"></activity>
-        <activity android:name=".LogInSignUp" />
         <activity android:name=".InformationForm" />
         <activity android:name=".SignInOptions" />
         <activity android:name=".NoInternet" />

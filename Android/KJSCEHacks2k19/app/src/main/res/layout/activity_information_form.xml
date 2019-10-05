@@ -34,10 +34,36 @@
 
         <AutoCompleteTextView
 
-            android:id="@+id/username"
+            android:id="@+id/userfname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your name"
+            android:hint="Enter first name"
+            android:imeOptions="actionNext"
+            android:inputType="textNoSuggestions"
+            android:maxLines="1"
+            android:textColor="@color/sky_blue"
+            android:textColorHint="@color/dark_grey"
+            android:textIsSelectable="false"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/dark_grey"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="10dp"
+        >
+
+        <AutoCompleteTextView
+
+            android:id="@+id/userlname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter last name"
             android:imeOptions="actionNext"
             android:inputType="textNoSuggestions"
             android:maxLines="1"
@@ -105,85 +131,11 @@
             android:layout_marginBottom="25dp"/>
 
     </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/dark_grey"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="10dp"
-        >
-
-        <AutoCompleteTextView
-            android:id="@+id/register_age"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your age"
-            android:imeOptions="actionNext"
-            android:inputType="phone"
-            android:maxLines="1"
-            android:textColor="@color/sky_blue"
-            android:textColorHint="@color/dark_grey"
-            android:textIsSelectable="false"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="25dp"/>
-
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/dark_grey"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="10dp"
-        >
-
-        <AutoCompleteTextView
-            android:id="@+id/pwd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter password"
-            android:imeOptions="actionNext"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:textColor="@color/sky_blue"
-            android:textColorHint="@color/dark_grey"
-            android:textIsSelectable="false"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="25dp"/>
-
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/dark_grey"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="10dp"
-        >
-
-        <AutoCompleteTextView
-            android:id="@+id/cpwd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Confirm Password"
-            android:imeOptions="actionNext"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:textColor="@color/sky_blue"
-            android:textColorHint="@color/dark_grey"
-            android:textIsSelectable="false"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="25dp"/>
-
-    </android.support.design.widget.TextInputLayout>
-
+        android:layout_height="wrap_content">
     <Button
-        android:layout_marginTop="30dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/save"
@@ -192,7 +144,14 @@
         android:background="@drawable/buttons_style"
         android:text="Save"
         android:textColor="@color/white"/>
-
+        <ProgressBar
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/pbar"
+            />
+    </RelativeLayout>
 
 
 </LinearLayout>

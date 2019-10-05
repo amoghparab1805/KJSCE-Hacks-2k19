@@ -39,7 +39,7 @@ public class SignInOptions extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        spref = getApplicationContext().getSharedPreferences("userName", MODE_PRIVATE);
+        spref = getApplicationContext().getSharedPreferences("user", MODE_PRIVATE);
         editor = spref.edit();
 
         setContentView(R.layout.activity_sign_in_options);
