@@ -101,6 +101,7 @@ public class InformationForm extends AppCompatActivity {
                                 startActivity(new Intent(InformationForm.this, MainActivity.class));
                                 finish();
                             }
+                            else
                             {
                                 Toast.makeText(InformationForm.this,"Something went wrong",Toast.LENGTH_LONG).show();
                                 save.setVisibility(View.VISIBLE);
