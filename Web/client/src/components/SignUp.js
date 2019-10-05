@@ -15,6 +15,7 @@ class SignUp extends Component {
     isSignedIn: false,
     collapsed: false,
     isNewUser:false,
+    user: {},
   }
   uiConfig = {
     signInFlow: "popup",
@@ -46,6 +47,7 @@ class SignUp extends Component {
           { headers: {"Content-Type": "application/json"} }
         ).then(response => {
           console.log(response.data)
+          this.setState({user:response.data.user})
           localStorage.setItem("token", response.data.token)
           // localStorage.setItem("isNewUser", response.data.is_new_user)
           this.setState({isNewUser:response.data.is_new_user})
@@ -53,6 +55,10 @@ class SignUp extends Component {
         })
       },
     }
+  }
+
+  nextPath(path) {
+    this.props.history.push(path);
   }
 
   closeModal = (e) => {
@@ -95,6 +101,9 @@ class SignUp extends Component {
             { headers: {"Content-Type": "application/json"} }
           ).then(response => {
             console.log(response.data)
+            this.setState({user:response.data.user})
+            this.setState({isNewUser:response.data.is_new_user})
+            localStorage.setItem("uid", response.data.user.username)
             localStorage.setItem("token", response.data.token)
             localStorage.removeItem("displayName")
           })
@@ -121,7 +130,7 @@ class SignUp extends Component {
                           <img
                             alt="profile"
                             style={{marginTop:'10px',marginLeft:'-12px', width:'40px', height: '40px'}}
-                            src={firebase.auth().currentUser.photoURL}
+                            src={this.state.user.photoURL}
                           />
                         </Menu.Item>
                       ) : (
@@ -129,29 +138,29 @@ class SignUp extends Component {
                           <img
                               alt="profile"
                               style={{marginTop:'10px', width:'60px', height: '60px'}}
-                              src={firebase.auth().currentUser.photoURL}
+                              src={this.state.user.photoURL}
                             />&nbsp;&nbsp;
-                          <span style={{fontSize:'14px', color:'white', fontWeight:'bold'}}>{firebase.auth().currentUser.displayName}</span>
+                          <span style={{fontSize:'14px', color:'white', fontWeight:'bold'}}>{this.state.user.displayName}</span>
                         </Menu.Item>
                       )}
-                      <Menu.Item key="1" style={{height:'60px', fontSize:'18px'}}>
-                        <Icon type="stock" />
-                        <span>Stocks</span>
-                      </Menu.Item>
-                      <Menu.Item key="5" style={{height:'60px'}}>
-                        <Icon type="pie-chart" />
-                        <span>Investments</span>
-                      </Menu.Item>
-                      <Menu.Item key="2" style={{height:'60px'}}>
-                        <Icon type="desktop" />
-                        <span>Customer Care</span>
-                      </Menu.Item>
-                      <Menu.Item key="3" style={{height:'60px'}}>
+                      <Menu.Item key="3" onClick={() => this.nextPath('/dashboard')} style={{height:'60px', fontSize:'18px'}}>
                         <Icon type="user" />
                         <span>User</span>
                       </Menu.Item>
-                      <Menu.Item key="4" onClick={this.signOut} style={{height:'60px'}}>
-                        <Icon type="file" />
+                      <Menu.Item key="1" onClick={() => this.nextPath('/stocks')} style={{height:'60px', fontSize:'18px'}}>
+                        <Icon type="stock" />
+                        <span>Stocks</span>
+                      </Menu.Item>
+                      <Menu.Item key="5" onClick={() => this.nextPath('/investments')} style={{height:'60px', fontSize:'18px'}}>
+                        <Icon type="pie-chart" />
+                        <span>Investments</span>
+                      </Menu.Item>
+                      <Menu.Item key="2" onClick={() => this.nextPath('/customer-care')} style={{height:'60px', fontSize:'18px'}}>
+                        <Icon type="desktop" />
+                        <span>Customer Care</span>
+                      </Menu.Item>
+                      <Menu.Item key="4" onClick={this.signOut} style={{height:'60px', fontSize:'18px'}}>
+                        <Icon type="sign-out" />
                         <span>Logout</span>
                       </Menu.Item>
                     </Menu>
@@ -159,13 +168,10 @@ class SignUp extends Component {
                   <Layout>
                     <Header style={{ background: '#fff', padding: 0 }} />
                     <Content style={{ margin: '0 16px' }}>
-                      <Breadcrumb style={{ margin: '16px 0' }}>
-                        <Breadcrumb.Item>User</Breadcrumb.Item>
-                        <Breadcrumb.Item>Bill</Breadcrumb.Item>
-                      </Breadcrumb>
+                      <br/>
                       <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>Bill is a cat.</div>
                     </Content>
-                    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                    <Footer style={{ textAlign: 'center' }}>Redhat Pirates ©2019 Created by Redhat Pirates</Footer>
                   </Layout>
                 </Layout>
               )
