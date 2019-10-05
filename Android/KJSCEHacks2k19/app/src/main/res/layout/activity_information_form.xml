@@ -29,7 +29,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginBottom="10dp"
+
         >
 
         <AutoCompleteTextView
@@ -55,7 +55,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginBottom="10dp"
+
         >
 
         <AutoCompleteTextView
@@ -81,8 +81,9 @@
         android:textColorHint="@color/dark_grey"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
+        android:visibility="gone"
         android:id="@+id/layoutEmail"
         >
 
@@ -111,7 +112,9 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:id="@+id/layoutPhone"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone"
         >
 
         <AutoCompleteTextView
@@ -128,14 +131,64 @@
             android:textIsSelectable="false"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginBottom="25dp"/>
+            />
 
     </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/dark_grey"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+
+        >
+
+        <AutoCompleteTextView
+
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your age"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLines="1"
+            android:textColor="@color/sky_blue"
+            android:textColorHint="@color/dark_grey"
+            android:textIsSelectable="false"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        >
+        <TextView
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gender"
+            android:textSize="20sp"/>
+
+
+
+        <Spinner
+            android:layout_marginLeft="60dp"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/gender_spinner"
+            android:prompt="@string/app_name"
+            />
+
+
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
     <Button
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/save"
@@ -143,6 +196,8 @@
         android:layout_marginLeft="25dp"
         android:background="@drawable/buttons_style"
         android:text="Save"
+        android:elevation="2dp"
+        android:textSize="30dp"
         android:textColor="@color/white"/>
         <ProgressBar
             android:layout_centerHorizontal="true"
@@ -152,6 +207,4 @@
             android:id="@+id/pbar"
             />
     </RelativeLayout>
-
-
 </LinearLayout>
