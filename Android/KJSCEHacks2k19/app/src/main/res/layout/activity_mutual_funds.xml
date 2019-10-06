@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="State Bank of India"
+        android:textSize="40dp"
+        android:gravity="center_horizontal"
+        android:textStyle="bold" />
+    <ImageView
+        android:layout_width="375dp"
+        android:layout_height="200dp"
+        android:src="@drawable/sbi"
+        android:layout_gravity="center_horizontal"/><View
+    android:layout_width="match_parent"
+    android:layout_height="30dp"></View>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Goldman Sachs"
+        android:textSize="40dp"
+        android:gravity="center_horizontal"
+        android:textStyle="bold" />
+    <ImageView
+        android:layout_width="375dp"
+        android:layout_height="200dp"
+        android:src="@drawable/goldman"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>

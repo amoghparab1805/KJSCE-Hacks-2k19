@@ -34,12 +34,12 @@ public class BottomNavigationMain extends AppCompatActivity {
                     case R.id.atm:
                         tempFragment = new ATMFragment();
                         break;
-//                    case R.id.status:
-//                        tempFragment = new StatusFragment();
-//                        break;
-//                    case R.id.log_out:
-//                        tempFragment = new LogOutFragment();
-//                        break;
+                  case R.id.chat:
+                      tempFragment = new ChatFragment();
+                        break;
+                    case R.id.prediction:
+                        tempFragment = new PredictionFragment();
+                        break;
 
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, tempFragment).commit();

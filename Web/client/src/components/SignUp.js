@@ -14,6 +14,8 @@ class SignUp extends Component {
   state = { 
     isSignedIn: false,
     collapsed: false,
+    isNewUser:false,
+    user: {},
   }
   uiConfig = {
     signInFlow: "popup",
@@ -52,6 +54,10 @@ class SignUp extends Component {
         })
       },
     }
+  }
+
+  nextPath(path) {
+    this.props.history.push(path);
   }
 
   closeModal = (e) => {
@@ -99,6 +105,9 @@ class SignUp extends Component {
             { headers: {"Content-Type": "application/json"} }
           ).then(response => {
             console.log(response.data)
+            this.setState({user:response.data.user})
+            this.setState({isNewUser:response.data.is_new_user})
+            localStorage.setItem("uid", response.data.user.username)
             localStorage.setItem("token", response.data.token)
             // localStorage.removeItem("displayName")
           })
