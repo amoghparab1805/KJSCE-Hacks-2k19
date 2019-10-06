@@ -40,7 +40,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="0dp"
                     android:gravity="end"
-                    android:text="Income"
+                    android:text="3200"
                     android:textSize="25sp"
                     android:layout_alignParentRight="true" />
             </RelativeLayout>
@@ -70,8 +70,9 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_gravity="end"
-                    android:text="Expense"
-                    android:textSize="25sp" />
+                    android:text="600"
+                    android:textSize="25sp"
+                    android:layout_alignParentRight="true" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -119,7 +120,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_gravity="end"
-                android:text="Balance"
+                android:text="2600"
                 android:textSize="25sp"
                 android:layout_alignParentRight="true" />
         </RelativeLayout>

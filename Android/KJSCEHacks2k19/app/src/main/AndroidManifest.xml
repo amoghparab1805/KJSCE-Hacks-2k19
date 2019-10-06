@@ -13,7 +13,9 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OtherInvestment"></activity>
+        <activity android:name=".Stocks"></activity>
+        <activity android:name=".MutualFunds" />
+        <activity android:name=".OtherInvestment" />
         <activity android:name=".RealEstate" />
         <activity android:name=".SpendingForm" />
         <activity android:name=".ExpenditureHistory" />

@@ -1,7 +1,7 @@
 package com.redhatpirates.kjsce_hacks_2k19;
 
 public class UserDetails {
-    private String displayName,email, phoneNumber, uid, providerId,photoURL,token,age,gender;
+    private String displayName,email, phoneNumber, uid, providerId,photoURL,token,age,gender,income;
 
     public String getAge() {
         return age;
@@ -39,11 +39,15 @@ public class UserDetails {
         return token;
     }
 
+    public String getIncome() {
+        return income;
+    }
+
     public UserDetails(String token) {
         this.token = token;
     }
 
-    public UserDetails(String displayName, String email, String phoneNumber, String uid, String providerId, String photoURL,String age,String gender) {
+    public UserDetails(String displayName, String email, String phoneNumber, String uid, String providerId, String photoURL,String age,String gender,String income) {
         this.displayName =displayName;
         this.phoneNumber = phoneNumber;
         this.uid = uid;
@@ -52,5 +56,6 @@ public class UserDetails {
         this.email=email;
         this.age=age;
         this.gender=gender;
+        this.income=income;
     }
 }

@@ -15,4 +15,5 @@ public interface RetrofitInterface {
     Call<ArrayList<MoneySpent>> getExpenditures(@Body MoneySpent moneySpent);
     @POST("add-expenditure/")
     Call<MoneySpent>addExpenditure(@Body MoneySpent moneySpent);
+
 }

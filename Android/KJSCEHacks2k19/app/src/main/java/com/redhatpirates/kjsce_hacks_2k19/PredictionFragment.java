@@ -47,7 +47,7 @@ Button realEstate,jewellery,stocks,MutualFunds;
         stocks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(getActivity(),OtherInvestment.class);
+                Intent in=new Intent(getActivity(),Stocks.class);
                 in.putExtra("type","stocks");
                 startActivity(in);
             }
@@ -55,7 +55,7 @@ Button realEstate,jewellery,stocks,MutualFunds;
         MutualFunds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(getActivity(),OtherInvestment.class);
+                Intent in=new Intent(getActivity(),MutualFunds.class);
                 in.putExtra("type","mutual");
                 startActivity(in);
             }

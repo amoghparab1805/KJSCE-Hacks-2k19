@@ -78,7 +78,8 @@ public class SpendingForm extends AppCompatActivity {
         if(typeA.equals("expense"))
         {
             mSpin.setAdapter(new ArrayAdapter<>(SpendingForm.this,android.R.layout.simple_spinner_dropdown_item,expense));
-        }
+            category.setVisibility(View.VISIBLE);
+            }
         else if(typeA.equals("income"))
         {
 mSpin.setVisibility(View.GONE);

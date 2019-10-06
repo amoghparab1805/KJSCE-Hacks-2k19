@@ -8,27 +8,28 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="Gold"
-        android:textSize="50dp"
+        android:text="State Bank of India"
+        android:textSize="40dp"
         android:gravity="center_horizontal"
         android:textStyle="bold" />
     <ImageView
         android:layout_width="375dp"
         android:layout_height="200dp"
-        android:id="@+id/img1"
-        android:src="@drawable/gold"
-        android:layout_gravity="center_horizontal"/>
+        android:src="@drawable/sbi"
+        android:layout_gravity="center_horizontal"/><View
+    android:layout_width="match_parent"
+    android:layout_height="30dp"></View>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="Silver"
-        android:textSize="50dp"
+        android:text="Goldman Sachs"
+        android:textSize="40dp"
         android:gravity="center_horizontal"
         android:textStyle="bold" />
     <ImageView
         android:layout_width="375dp"
         android:layout_height="200dp"
-        android:id="@+id/img2"
-        android:src="@drawable/silver"
+        android:src="@drawable/goldman"
         android:layout_gravity="center_horizontal"/>
+
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.redhatpirates.kjsce_hacks_2k19;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -79,41 +80,55 @@ public class InformationForm extends AppCompatActivity {
                     Toast.makeText(InformationForm.this, "Fields cannot be empty", Toast.LENGTH_LONG).show();
                 } else {
                     if (type.equals("phone")) {
-                        ud = new UserDetails(""+userfName.getText().toString()+" "+userlName.getText().toString(),"",phone.getText().toString(),user.getUid(),user.getProviderId(),"",age.getText().toString(),genderlist[(int) mSpin.getSelectedItemId()].substring(0,1));
+                        ud = new UserDetails(""+userfName.getText().toString()+" "+userlName.getText().toString(),"",phone.getText().toString(),user.getUid(),user.getProviderId(),"",age.getText().toString(),genderlist[(int) mSpin.getSelectedItemId()].substring(0,1),"");
                     } else {
-                        ud = new UserDetails(""+userfName.getText().toString()+" "+userlName.getText().toString(),user.getEmail(),"",user.getUid(),user.getProviderId(),user.getPhotoUrl().toString(),age.getText().toString(),genderlist[(int) mSpin.getSelectedItemId()].substring(0,1));
+                        ud = new UserDetails(""+userfName.getText().toString()+" "+userlName.getText().toString(),user.getEmail(),"",user.getUid(),user.getProviderId(),user.getPhotoUrl().toString(),age.getText().toString(),genderlist[(int) mSpin.getSelectedItemId()].substring(0,1),"");
                     }
                     save.setVisibility(View.GONE);
                     pbar.setVisibility(View.VISIBLE);
                     RetrofitInterface ri = RetrofitInstance.getInstance().create(RetrofitInterface.class);
                     Call<UserDetails> userDetailsCall = ri.signIn(ud);
-                    userDetailsCall.enqueue(new Callback<UserDetails>() {
+                    Handler handler =new Handler();
+                    handler.postDelayed(new Runnable() {
                         @Override
-                        public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
-                            if(response.body()!=null) {
-                                Toast.makeText(InformationForm.this, "Welcome", Toast.LENGTH_LONG).show();
-                                editor.putString("token", response.body().getToken());
-                                Gson gson = new Gson();
-                                String json = gson.toJson(ud);
-                                editor.putString("user", json);
-                                editor.commit();
-                                startActivity(new Intent(InformationForm.this, MainActivity.class));
-                                finish();
-                            }
-                            else
-                            {
-                                Toast.makeText(InformationForm.this,"Something went wrong",Toast.LENGTH_LONG).show();
-                                save.setVisibility(View.VISIBLE);
-                                pbar.setVisibility(View.GONE);
-                            }
+                        public void run() {
+                            Gson gson = new Gson();
+                            String json = gson.toJson(ud);
+                            editor.putString("user", json);
+                            editor.putString("token", ud.getDisplayName());
+                            editor.commit();
+                            startActivity(new Intent(InformationForm.this, MainActivity.class));
+                            finish();
                         }
-                        @Override
-                        public void onFailure(Call<UserDetails> call, Throwable t) {
-                            Toast.makeText(InformationForm.this,""+t.getMessage(),Toast.LENGTH_LONG).show();
-                            save.setVisibility(View.VISIBLE);
-                            pbar.setVisibility(View.GONE);
-                        }
-                    });
+                    },2500);
+
+//                    userDetailsCall.enqueue(new Callback<UserDetails>() {
+//                        @Override
+//                        public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
+//                            if(response.body()!=null) {
+//                                Toast.makeText(InformationForm.this, "Welcome", Toast.LENGTH_LONG).show();
+//                                editor.putString("token", response.body().getToken());
+//                                Gson gson = new Gson();
+//                                String json = gson.toJson(ud);
+//                                editor.putString("user", json);
+//                                editor.commit();
+//                                startActivity(new Intent(InformationForm.this, MainActivity.class));
+//                                finish();
+//                            }
+//                            else
+//                            {
+//                                Toast.makeText(InformationForm.this,"Something went wrong",Toast.LENGTH_LONG).show();
+//                                save.setVisibility(View.VISIBLE);
+//                                pbar.setVisibility(View.GONE);
+//                            }
+//                        }
+//                        @Override
+//                        public void onFailure(Call<UserDetails> call, Throwable t) {
+//                            Toast.makeText(InformationForm.this,""+t.getMessage(),Toast.LENGTH_LONG).show();
+//                            save.setVisibility(View.VISIBLE);
+//                            pbar.setVisibility(View.GONE);
+//                        }
+//                    });
                 }
             }
         });

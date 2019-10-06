@@ -57,41 +57,41 @@ public class DashboardFragment extends Fragment {
         UserDetails ud = gson.fromJson(json, UserDetails.class);
         RetrofitInterface ri = RetrofitInstance.getInstance().create(RetrofitInterface.class);
         final Call<ArrayList<MoneySpent>> moneySpent = ri.getExpenditures(new MoneySpent(ud.getUid()));
-        moneySpent.enqueue(new Callback<ArrayList<MoneySpent>>() {
-            @Override
-            public void onResponse(Call<ArrayList<MoneySpent>> call, Response<ArrayList<MoneySpent>> response) {
-                ArrayList<MoneySpent>ms=response.body();
-                if(response.body()!=null)
-                {expenseA=0;
-                incomeA=0;
-                    for(MoneySpent ms1:ms)
-                    {
-                        if(ms1.getExpenditure_type().equals("income"))
-                        {
-                           incomeA+=incomeA;
-                        }
-                        else
-                        {
-                            expenseA+=expenseA;
-                        }
-                    }
-                    income.setText(""+incomeA);
-                    expense.setText(""+expenseA);
-                    totalA=incomeA-expenseA;
-                    balance.setText(""+totalA);
-
-                }
-                else
-                {
-                    Toast.makeText(getActivity(),"Something went wrong",Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<MoneySpent>> call, Throwable t) {
-                Toast.makeText(getActivity(),""+t.getMessage(),Toast.LENGTH_LONG).show();
-            }
-        });
+//        moneySpent.enqueue(new Callback<ArrayList<MoneySpent>>() {
+//            @Override
+//            public void onResponse(Call<ArrayList<MoneySpent>> call, Response<ArrayList<MoneySpent>> response) {
+//                ArrayList<MoneySpent>ms=response.body();
+//                if(response.body()!=null)
+//                {expenseA=0;
+//                incomeA=0;
+//                    for(MoneySpent ms1:ms)
+//                    {
+//                        if(ms1.getExpenditure_type().equals("income"))
+//                        {
+//                           incomeA+=incomeA;
+//                        }
+//                        else
+//                        {
+//                            expenseA+=expenseA;
+//                        }
+//                    }
+//                    income.setText(""+incomeA);
+//                    expense.setText(""+expenseA);
+//                    totalA=incomeA-expenseA;
+//                    balance.setText(""+totalA);
+//
+//                }
+//                else
+//                {
+//                    Toast.makeText(getActivity(),"Something went wrong",Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ArrayList<MoneySpent>> call, Throwable t) {
+//                Toast.makeText(getActivity(),""+t.getMessage(),Toast.LENGTH_LONG).show();
+//            }
+//        });
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +103,7 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent in =new Intent(getActivity(),SpendingForm.class);
-                in.putExtra("type","income");
+                in.putExtra("type","expense");
                 startActivity(in);
             }
         });
@@ -111,7 +111,7 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent in =new Intent(getActivity(),SpendingForm.class);
-                in.putExtra("type","expense");
+                in.putExtra("type","income");
                 startActivity(in);
             }
         });
